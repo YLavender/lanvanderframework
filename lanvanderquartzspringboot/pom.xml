@@ -11,6 +11,9 @@
     <artifactId>lanvander-quartzspringboot</artifactId>
     <version>1.0-SNAPSHOT</version>
     <name>lanvander-quartzspringboot</name>
+    <description>
+        SpringBoot整合Quartz实现动态定时任务
+    </description>
 
     <properties>
         <java.version>11</java.version>
