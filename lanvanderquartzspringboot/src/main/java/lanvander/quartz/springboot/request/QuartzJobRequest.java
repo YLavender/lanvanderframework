@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
+import java.util.List;
 import java.util.Map;
 
 @Data
@@ -116,7 +117,7 @@ public class QuartzJobRequest {
   @JsonProperty("JOB_TYPE")
   private String jobType;
 
-  @ApiModelProperty(value = "JOB_DATA_MAP", notes = "任务执行交互数据", example = "", dataType = "Map")
+  @ApiModelProperty(value = "JOB_DATA_MAP", notes = "任务执行交互数据", example = "", dataType = "list")
   @JsonProperty("JOB_DATA_MAP")
-  private Map<String, Object> jobDataMap;
+  private List<Map<String, Object>> jobDataMap;
 }

@@ -79,9 +79,9 @@ public class QuartzSpringBootServiceImpl implements QuartzSpringBootService {
     JobDetail jobDetail = createJobDetail(request, null);
     Trigger trigger = getTrigger(request, getScheduleBuilder(request));
     try {
-      jobMapper.insertSelective(createInsertJob(request));
       scheduler.scheduleJob(jobDetail, trigger);
       scheduler.start();
+      jobMapper.insertSelective(createInsertJob(request));
       return ServerResponse.success();
     } catch (SchedulerException ex) {
       log.error("创建定时任务失败, 异常原因: {}, 异常信息: {}", ex.getCause(), ex.getMessage());
@@ -102,8 +102,8 @@ public class QuartzSpringBootServiceImpl implements QuartzSpringBootService {
               .withIdentity(triggerKey)
               .withSchedule(scheduleBuilder)
               .build();
-      jobMapper.updateByPrimaryKey(createUpdateJob(request, null));
       scheduler.rescheduleJob(triggerKey, trigger);
+      jobMapper.updateByPrimaryKey(createUpdateJob(request, null));
       return ServerResponse.success();
     } catch (SchedulerException ex) {
       log.error("更新定时任务失败, 异常原因: {}, 异常信息: {}", ex.getCause(), ex.getMessage());
@@ -127,8 +127,8 @@ public class QuartzSpringBootServiceImpl implements QuartzSpringBootService {
               .withIdentity(triggerKey)
               .withSchedule(scheduleBuilder)
               .build();
-      jobMapper.updateByPrimaryKey(createUpdateJob(request, job));
       scheduler.rescheduleJob(triggerKey, trigger);
+      jobMapper.updateByPrimaryKey(createUpdateJob(request, job));
       return ServerResponse.success();
     } catch (SchedulerException ex) {
       log.error("更新定时任务失败, 异常原因: {}, 异常信息: {}", ex.getCause(), ex.getMessage());
@@ -140,8 +140,8 @@ public class QuartzSpringBootServiceImpl implements QuartzSpringBootService {
     Job job = jobMapper.selectByJob(request.getJobName(), request.getJobGroupName());
     if (job == null) return ServerResponse.error("没有对应的任务, 无法删除.");
     try {
-      jobMapper.deleteByPrimaryKey(job.getId());
       scheduler.deleteJob(new JobKey(request.getJobName(), request.getJobGroupName()));
+      jobMapper.deleteByPrimaryKey(job.getId());
       return ServerResponse.success();
     } catch (SchedulerException ex) {
       log.error("删除定时任务失败, 异常原因: {}, 异常信息: {}", ex.getCause(), ex.getMessage());
@@ -154,8 +154,8 @@ public class QuartzSpringBootServiceImpl implements QuartzSpringBootService {
     if (job == null) return ServerResponse.error("没有对应的任务, 无法暂停.");
     try {
       job.setIsPause("1");
-      jobMapper.updateByPrimaryKeySelective(job);
       scheduler.pauseJob(new JobKey(request.getJobName(), request.getJobGroupName()));
+      jobMapper.updateByPrimaryKeySelective(job);
       return ServerResponse.success();
     } catch (SchedulerException ex) {
       log.error("暂停定时任务失败, 异常原因: {}, 异常信息: {}", ex.getCause(), ex.getMessage());
@@ -168,8 +168,8 @@ public class QuartzSpringBootServiceImpl implements QuartzSpringBootService {
     if (job == null) return ServerResponse.error("没有对应的任务, 无法唤醒.");
     try {
       job.setIsPause("0");
-      jobMapper.updateByPrimaryKeySelective(job);
       scheduler.resumeJob(new JobKey(request.getJobName(), request.getJobGroupName()));
+      jobMapper.updateByPrimaryKeySelective(job);
       return ServerResponse.success();
     } catch (SchedulerException ex) {
       log.error("唤醒定时任务失败, 异常原因: {}, 异常信息: {}", ex.getCause(), ex.getMessage());
@@ -206,6 +206,7 @@ public class QuartzSpringBootServiceImpl implements QuartzSpringBootService {
     return ServerResponse.error("查询不到数据");
   }
 
+  // 构建定时任务返回报文
   private List<QuartzJobResponse> assembleQuartzJobResponse(List<Job> jobList) {
     List<QuartzJobResponse> responseList = new ArrayList<>();
     jobList.stream()
@@ -219,6 +220,7 @@ public class QuartzSpringBootServiceImpl implements QuartzSpringBootService {
     return responseList;
   }
 
+  // 根据类型变换任务间隔时间
   private long getIntervalTime(int intervalTime, String intervalTimeType) {
     switch (intervalTimeType) {
       case "ms":
@@ -234,6 +236,7 @@ public class QuartzSpringBootServiceImpl implements QuartzSpringBootService {
     }
   }
 
+  // 根据数据创建定时任务构造器
   private ScheduleBuilder getScheduleBuilder(QuartzJobRequest request) {
     ScheduleBuilder scheduleBuilder;
     if (request.getCronExpression() != null)
@@ -252,6 +255,7 @@ public class QuartzSpringBootServiceImpl implements QuartzSpringBootService {
     return scheduleBuilder;
   }
 
+  // 根据数据创建触发器
   private Trigger getTrigger(QuartzJobRequest request, ScheduleBuilder scheduleBuilder) {
     Trigger trigger;
 
@@ -288,6 +292,7 @@ public class QuartzSpringBootServiceImpl implements QuartzSpringBootService {
     return trigger;
   }
 
+  // 创建插入的任务数据
   private Job createInsertJob(QuartzJobRequest request) {
     Job job = new Job();
     job.setJobName(request.getJobName());
@@ -309,12 +314,17 @@ public class QuartzSpringBootServiceImpl implements QuartzSpringBootService {
     return job;
   }
 
+  // 创建更新的任务数据
   private Job createUpdateJob(QuartzJobRequest request, Job origin) {
     Job job = new Job();
     if (origin == null) {
       job.setJobName(request.getJobName());
       job.setJobGroup(request.getJobGroupName());
       job.setDescription(request.getDescription());
+      job.setJobDataMap(
+          request.getJobDataMap() == null || request.getJobDataMap().isEmpty()
+              ? job.getJobDataMap()
+              : ByteArrayUtils.convertToByteArray(request.getJobDataMap()));
       if (request.getCronExpression() != null) {
         job.setCronExpression(request.getCronExpression());
         job.setIntervalTimeType("");
@@ -337,10 +347,12 @@ public class QuartzSpringBootServiceImpl implements QuartzSpringBootService {
     return job;
   }
 
+  // check任务是否存在
   private boolean checkJobExists(QuartzJobRequest request) {
     return jobMapper.selectByJob(request.getJobName(), request.getJobGroupName()) != null;
   }
 
+  // check任务是否是当前时间要执行的任务
   private boolean checkJobValid(Job job) {
     if (!StringUtils.isEmpty(job.getCronExpression()) && "0".equals(job.getIsPause())) return true;
     Date date = new Date();
@@ -352,11 +364,13 @@ public class QuartzSpringBootServiceImpl implements QuartzSpringBootService {
     } else return !endDateFlag;
   }
 
+  // 根据数据创建任务详细
   private JobDetail createJobDetail(QuartzJobRequest request, Job job) {
     if (request == null) return createJobDetailByJob(job);
     else return createJobDetailByRequest(request);
   }
 
+  // 根据数据库的任务创建任务详细
   private JobDetail createJobDetailByJob(Job job) {
     JobDataMap jobDataMap = new JobDataMap();
     if (job.getJobDataMap() != null && job.getJobDataMap().length > 0) {
@@ -384,16 +398,11 @@ public class QuartzSpringBootServiceImpl implements QuartzSpringBootService {
     return jobDetail;
   }
 
+  // 根据报文创建任务详细
   private JobDetail createJobDetailByRequest(QuartzJobRequest request) {
     JobDataMap jobDataMap = new JobDataMap();
     if (request.getJobDataMap() != null && !request.getJobDataMap().isEmpty()) {
-      request
-          .getJobDataMap()
-          .keySet()
-          .forEach(
-              key -> {
-                jobDataMap.put(key, request.getJobDataMap().get(key));
-              });
+      jobDataMap.put("data", request.getJobDataMap());
     }
     JobDetail jobDetail =
         JobBuilder.newJob(

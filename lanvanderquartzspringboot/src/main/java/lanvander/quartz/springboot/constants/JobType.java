@@ -1,12 +1,12 @@
 package lanvander.quartz.springboot.constants;
 
 import lanvander.quartz.springboot.job.QuartzSpringBootJobBean;
-import lanvander.quartz.springboot.job.QuartzSpringBootSMSJobBean;
+import lanvander.quartz.springboot.job.QuartzSpringBootMessageJobBean;
 import lombok.Getter;
 
 public enum JobType {
   NORMAL_JOB("normal", QuartzSpringBootJobBean.class),
-  SMS_JOB("sms", QuartzSpringBootSMSJobBean.class);
+  SMS_JOB("sms", QuartzSpringBootMessageJobBean.class);
 
   @Getter private String className;
   @Getter private Class jobClass;
