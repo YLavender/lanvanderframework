@@ -22,6 +22,8 @@ public interface QuartzSpringBootService {
 
   ServerResponse runJob(QuartzJobRequest request);
 
+  ServerResponse<QuartzJobResponse> getJob(String jobName, String jobGroupName);
+
   ServerResponse<List<QuartzJobResponse>> getAllJobs();
 
   ServerResponse<List<QuartzJobResponse>> getExecutingJobs();

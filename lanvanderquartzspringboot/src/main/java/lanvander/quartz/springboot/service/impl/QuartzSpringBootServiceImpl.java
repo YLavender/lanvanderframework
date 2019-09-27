@@ -188,6 +188,13 @@ public class QuartzSpringBootServiceImpl implements QuartzSpringBootService {
     }
   }
 
+  public ServerResponse<QuartzJobResponse> getJob(String jobName, String jobGroupName) {
+    Job job = jobMapper.selectByJob(jobName, jobGroupName);
+    if (job != null)
+      return ServerResponse.success(assembleQuartzJobResponse(Arrays.asList(job)).get(0));
+    return ServerResponse.error("查询不到数据");
+  }
+
   public ServerResponse<List<QuartzJobResponse>> getAllJobs() {
     List<Job> resultList = jobMapper.getAllJobs();
     if (resultList != null && resultList.size() > 0) {

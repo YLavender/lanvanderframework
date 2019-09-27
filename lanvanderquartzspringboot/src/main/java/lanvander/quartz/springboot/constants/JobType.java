@@ -6,7 +6,7 @@ import lombok.Getter;
 
 public enum JobType {
   NORMAL_JOB("normal", QuartzSpringBootJobBean.class),
-  SMS_JOB("sms", QuartzSpringBootMessageJobBean.class);
+  SMS_JOB("message", QuartzSpringBootMessageJobBean.class);
 
   @Getter private String className;
   @Getter private Class jobClass;

@@ -61,6 +61,13 @@ public class QuartzSpringBootController {
     return quartzSpringBootService.runJob(request);
   }
 
+  @RequestMapping(value = "/getJob", method = RequestMethod.GET)
+  @ApiOperation(value = "获取指定的定时任务", httpMethod = "GET", notes = "/getJob")
+  public ServerResponse<QuartzJobResponse> getJob(
+      @RequestParam("job") String jobName, @RequestParam("group") String jobGroupName) {
+    return quartzSpringBootService.getJob(jobName, jobGroupName);
+  }
+
   @RequestMapping(value = "/getAllJobs", method = RequestMethod.GET)
   @ApiOperation(value = "获取所有定时任务", httpMethod = "GET", notes = "/getAllJobs")
   public ServerResponse<List<QuartzJobResponse>> getAllJobs() {
