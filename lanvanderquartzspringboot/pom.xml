@@ -7,16 +7,18 @@
         <artifactId>lanvander-framework</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
-    <groupId>lanvander</groupId>
-    <artifactId>lanvander-quartzspringboot</artifactId>
+
+    <artifactId>lanvander-quartz-springboot</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <name>lanvander-quartzspringboot</name>
+    <name>lanvander-quartz-springboot</name>
     <description>
         SpringBoot整合Quartz实现动态定时任务
     </description>
 
     <properties>
         <java.version>11</java.version>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
     </properties>
 
     <dependencies>
@@ -25,7 +27,6 @@
             <groupId>lanvander</groupId>
             <artifactId>lanvander-base</artifactId>
             <version>1.0-SNAPSHOT</version>
-            <type>pom</type>
         </dependency>
 
         <dependency>
