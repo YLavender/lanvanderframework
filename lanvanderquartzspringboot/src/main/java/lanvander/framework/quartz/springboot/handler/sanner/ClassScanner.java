@@ -1,6 +1,6 @@
 package lanvander.framework.quartz.springboot.handler.sanner;
 
-import lanvander.framework.elasticjob.java.utils.CollectionUtils;
+import lanvander.utils.CollectionUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.BeanDefinitionStoreException;
 import org.springframework.context.ResourceLoaderAware;

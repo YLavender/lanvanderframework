@@ -1,7 +1,7 @@
 package lanvander.framework.quartz.java.job;
 
 import com.alibaba.fastjson.JSON;
-import lanvander.framework.elasticjob.java.utils.RandomUtils;
+import lanvander.utils.RandomUtils;
 import lombok.Data;
 import org.quartz.*;
 

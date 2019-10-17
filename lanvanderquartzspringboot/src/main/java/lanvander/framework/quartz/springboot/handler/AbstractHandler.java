@@ -1,7 +1,7 @@
 package lanvander.framework.quartz.springboot.handler;
 
 import com.alibaba.fastjson.JSONObject;
-import lanvander.framework.elasticjob.java.utils.PropertiesUtils;
+import lanvander.utils.PropertiesUtils;
 
 public abstract class AbstractHandler {
   static {

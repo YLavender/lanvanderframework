@@ -2,10 +2,10 @@ package lanvander.framework.quartz.springboot.service.impl;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import lanvander.framework.elasticjob.java.utils.StringUtils;
 import lanvander.framework.quartz.springboot.handler.AbstractHandler;
 import lanvander.framework.quartz.springboot.handler.context.HandlerContext;
 import lanvander.framework.quartz.springboot.service.MessageSendService;
+import lanvander.utils.StringUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
