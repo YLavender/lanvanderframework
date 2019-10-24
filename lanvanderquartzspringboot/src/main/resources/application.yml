@@ -5,9 +5,9 @@ spring:
     job-store-type: jdbc
     wait-for-jobs-to-complete-on-shutdown: true
     jdbc:
-      comment-prefix: #
+      comment-prefix: '#'
       initialize-schema: never
-    restart-on-deploy: false
+    restart-on-deploy: 0 #1 - 重启, other - 不重启
 
   datasource:
     url: jdbc:mysql://localhost:3306/lanvanderframework?serverTimezone=Asia/Shanghai&useSSL=false&allowPublicKeyRetrieval=true

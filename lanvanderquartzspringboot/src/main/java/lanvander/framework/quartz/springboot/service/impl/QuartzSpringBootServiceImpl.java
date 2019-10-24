@@ -48,7 +48,7 @@ public class QuartzSpringBootServiceImpl implements QuartzSpringBootService {
 
   @PostConstruct
   private void restartJob() {
-    if (!"true".equals(isRestart)) return;
+    if (!"1".equals(isRestart)) return;
     List<lanvander.framework.quartz.springboot.request.Job> jobList = jobMapper.getAllJobs();
     jobList.stream()
         .filter(this::checkJobValid)

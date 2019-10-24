@@ -45,12 +45,12 @@
         </constructor>
     </resultMap>
     <sql id="Base_Column_List">
-    ID, JOB_NAME, JOB_GROUP, JOB_TYPE, TRIGGER_NAME, TRIGGER_GROUP_NAME, DESCRIPTION, 
-    CRON_EXPRESSION, START_DATE, END_DATE, IS_PAUSE, INTERVAL_TIME, INTERVAL_TIME_TYPE, 
-    INTERVAL_COUNT, CREATE_TIME, UPDATE_TIME, VERSION
+        ID, JOB_NAME, JOB_GROUP, JOB_TYPE, TRIGGER_NAME, TRIGGER_GROUP_NAME, DESCRIPTION,
+        CRON_EXPRESSION, START_DATE, END_DATE, IS_PAUSE, INTERVAL_TIME, INTERVAL_TIME_TYPE,
+        INTERVAL_COUNT, CREATE_TIME, UPDATE_TIME, VERSION
     </sql>
     <sql id="Blob_Column_List">
-    JOB_DATA_MAP
+        JOB_DATA_MAP
     </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
         select
@@ -62,7 +62,7 @@
     </select>
     <select id="selectByJob" parameterType="map" resultMap="ResultMapWithBLOBs">
         select
-        <include refid="Base_Column_List"></include>
+        <include refid="Base_Column_List"/>
         ,
         <include refid="Blob_Column_List"/>
         from QRTZ_JOB
@@ -71,31 +71,30 @@
     </select>
     <select id="getAllJobs" resultMap="ResultMapWithBLOBs">
         select
-        <include refid="Base_Column_List"></include>
+        <include refid="Base_Column_List"/>
         ,
         <include refid="Blob_Column_List"/>
         from QRTZ_JOB
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from QRTZ_JOB
-    where ID = #{id,jdbcType=INTEGER}
+        delete
+        from QRTZ_JOB
+        where ID = #{id,jdbcType=INTEGER}
     </delete>
     <insert id="insert" parameterType="lanvander.framework.quartz.springboot.request.Job">
-    insert into QRTZ_JOB (JOB_NAME, JOB_GROUP,
-      JOB_TYPE, TRIGGER_NAME, TRIGGER_GROUP_NAME,
-      DESCRIPTION, CRON_EXPRESSION, START_DATE,
-      END_DATE, IS_PAUSE, INTERVAL_TIME,
-      INTERVAL_TIME_TYPE, INTERVAL_COUNT, CREATE_TIME, 
-      UPDATE_TIME, VERSION, JOB_DATA_MAP
-      )
-    values (#{jobName,jdbcType=VARCHAR}, #{jobGroup,jdbcType=VARCHAR},
-      #{jobType,jdbcType=VARCHAR}, #{triggerName,jdbcType=VARCHAR}, #{triggerGroupName,jdbcType=VARCHAR}, 
-      #{description,jdbcType=VARCHAR}, #{cronExpression,jdbcType=VARCHAR}, #{startDate,jdbcType=TIMESTAMP}, 
-      #{endDate,jdbcType=TIMESTAMP}, #{isPause,jdbcType=VARCHAR}, #{intervalTime,jdbcType=INTEGER}, 
-      #{intervalTimeType,jdbcType=VARCHAR}, #{intervalCount,jdbcType=INTEGER}, NOW(), 
-      NOW(), 0, #{jobDataMap,jdbcType=LONGVARBINARY}
-      )
-  </insert>
+        insert into QRTZ_JOB (JOB_NAME, JOB_GROUP,
+                              JOB_TYPE, TRIGGER_NAME, TRIGGER_GROUP_NAME,
+                              DESCRIPTION, CRON_EXPRESSION, START_DATE,
+                              END_DATE, IS_PAUSE, INTERVAL_TIME,
+                              INTERVAL_TIME_TYPE, INTERVAL_COUNT, CREATE_TIME,
+                              UPDATE_TIME, VERSION, JOB_DATA_MAP)
+        values (#{jobName,jdbcType=VARCHAR}, #{jobGroup,jdbcType=VARCHAR},
+                #{jobType,jdbcType=VARCHAR}, #{triggerName,jdbcType=VARCHAR}, #{triggerGroupName,jdbcType=VARCHAR},
+                #{description,jdbcType=VARCHAR}, #{cronExpression,jdbcType=VARCHAR}, #{startDate,jdbcType=TIMESTAMP},
+                #{endDate,jdbcType=TIMESTAMP}, #{isPause,jdbcType=VARCHAR}, #{intervalTime,jdbcType=INTEGER},
+                #{intervalTimeType,jdbcType=VARCHAR}, #{intervalCount,jdbcType=INTEGER}, NOW(),
+                NOW(), 0, #{jobDataMap,jdbcType=LONGVARBINARY})
+    </insert>
     <insert id="insertSelective" parameterType="lanvander.framework.quartz.springboot.request.Job">
         insert into QRTZ_JOB
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -244,42 +243,42 @@
         where ID = #{id,jdbcType=INTEGER}
     </update>
     <update id="updateByPrimaryKeyWithBLOBs" parameterType="lanvander.framework.quartz.springboot.request.Job">
-    update QRTZ_JOB
-    set JOB_NAME = #{jobName,jdbcType=VARCHAR},
-      JOB_GROUP = #{jobGroup,jdbcType=VARCHAR},
-      JOB_TYPE = #{jobType,jdbcType=VARCHAR},
-      TRIGGER_NAME = #{triggerName,jdbcType=VARCHAR},
-      TRIGGER_GROUP_NAME = #{triggerGroupName,jdbcType=VARCHAR},
-      DESCRIPTION = #{description,jdbcType=VARCHAR},
-      CRON_EXPRESSION = #{cronExpression,jdbcType=VARCHAR},
-      START_DATE = #{startDate,jdbcType=TIMESTAMP},
-      END_DATE = #{endDate,jdbcType=TIMESTAMP},
-      IS_PAUSE = #{isPause,jdbcType=VARCHAR},
-      INTERVAL_TIME = #{intervalTime,jdbcType=INTEGER},
-      INTERVAL_TIME_TYPE = #{intervalTimeType,jdbcType=VARCHAR},
-      INTERVAL_COUNT = #{intervalCount,jdbcType=INTEGER},
-      UPDATE_TIME = NOW(),
-      VERSION = VERSION + 1,
-      JOB_DATA_MAP = #{jobDataMap,jdbcType=LONGVARBINARY}
-    where ID = #{id,jdbcType=INTEGER}
+        update QRTZ_JOB
+        set JOB_NAME           = #{jobName,jdbcType=VARCHAR},
+            JOB_GROUP          = #{jobGroup,jdbcType=VARCHAR},
+            JOB_TYPE           = #{jobType,jdbcType=VARCHAR},
+            TRIGGER_NAME       = #{triggerName,jdbcType=VARCHAR},
+            TRIGGER_GROUP_NAME = #{triggerGroupName,jdbcType=VARCHAR},
+            DESCRIPTION        = #{description,jdbcType=VARCHAR},
+            CRON_EXPRESSION    = #{cronExpression,jdbcType=VARCHAR},
+            START_DATE         = #{startDate,jdbcType=TIMESTAMP},
+            END_DATE           = #{endDate,jdbcType=TIMESTAMP},
+            IS_PAUSE           = #{isPause,jdbcType=VARCHAR},
+            INTERVAL_TIME      = #{intervalTime,jdbcType=INTEGER},
+            INTERVAL_TIME_TYPE = #{intervalTimeType,jdbcType=VARCHAR},
+            INTERVAL_COUNT     = #{intervalCount,jdbcType=INTEGER},
+            UPDATE_TIME        = NOW(),
+            VERSION            = VERSION + 1,
+            JOB_DATA_MAP       = #{jobDataMap,jdbcType=LONGVARBINARY}
+        where ID = #{id,jdbcType=INTEGER}
     </update>
     <update id="updateByPrimaryKey" parameterType="lanvander.framework.quartz.springboot.request.Job">
-    update QRTZ_JOB
-    set JOB_NAME = #{jobName,jdbcType=VARCHAR},
-      JOB_GROUP = #{jobGroup,jdbcType=VARCHAR},
-      JOB_TYPE = #{jobType,jdbcType=VARCHAR},
-      TRIGGER_NAME = #{triggerName,jdbcType=VARCHAR},
-      TRIGGER_GROUP_NAME = #{triggerGroupName,jdbcType=VARCHAR},
-      DESCRIPTION = #{description,jdbcType=VARCHAR},
-      CRON_EXPRESSION = #{cronExpression,jdbcType=VARCHAR},
-      START_DATE = #{startDate,jdbcType=TIMESTAMP},
-      END_DATE = #{endDate,jdbcType=TIMESTAMP},
-      IS_PAUSE = #{isPause,jdbcType=VARCHAR},
-      INTERVAL_TIME = #{intervalTime,jdbcType=INTEGER},
-      INTERVAL_TIME_TYPE = #{intervalTimeType,jdbcType=VARCHAR},
-      INTERVAL_COUNT = #{intervalCount,jdbcType=INTEGER},
-      UPDATE_TIME = NOW(),
-      VERSION = VERSION + 1
-    where ID = #{id,jdbcType=INTEGER}
+        update QRTZ_JOB
+        set JOB_NAME           = #{jobName,jdbcType=VARCHAR},
+            JOB_GROUP          = #{jobGroup,jdbcType=VARCHAR},
+            JOB_TYPE           = #{jobType,jdbcType=VARCHAR},
+            TRIGGER_NAME       = #{triggerName,jdbcType=VARCHAR},
+            TRIGGER_GROUP_NAME = #{triggerGroupName,jdbcType=VARCHAR},
+            DESCRIPTION        = #{description,jdbcType=VARCHAR},
+            CRON_EXPRESSION    = #{cronExpression,jdbcType=VARCHAR},
+            START_DATE         = #{startDate,jdbcType=TIMESTAMP},
+            END_DATE           = #{endDate,jdbcType=TIMESTAMP},
+            IS_PAUSE           = #{isPause,jdbcType=VARCHAR},
+            INTERVAL_TIME      = #{intervalTime,jdbcType=INTEGER},
+            INTERVAL_TIME_TYPE = #{intervalTimeType,jdbcType=VARCHAR},
+            INTERVAL_COUNT     = #{intervalCount,jdbcType=INTEGER},
+            UPDATE_TIME        = NOW(),
+            VERSION            = VERSION + 1
+        where ID = #{id,jdbcType=INTEGER}
     </update>
 </mapper>
