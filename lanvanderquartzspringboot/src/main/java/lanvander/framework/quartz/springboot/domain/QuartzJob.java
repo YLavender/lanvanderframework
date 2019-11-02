@@ -1,4 +1,4 @@
-package lanvander.framework.quartz.springboot.request;
+package lanvander.framework.quartz.springboot.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

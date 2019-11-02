@@ -20,4 +20,4 @@ spring:
 
 mybatis:
   mapper-locations: classpath:mappers/*Mapper.xml
-  type-aliases-package: lanvander.quartz.springboot.request
+  type-aliases-package: lanvander.framework.quartz.springboot.domain

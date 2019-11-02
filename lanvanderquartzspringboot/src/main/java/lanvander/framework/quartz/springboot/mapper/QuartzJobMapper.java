@@ -1,6 +1,6 @@
 package lanvander.framework.quartz.springboot.mapper;
 
-import lanvander.framework.quartz.springboot.request.QuartzJob;
+import lanvander.framework.quartz.springboot.domain.QuartzJob;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 

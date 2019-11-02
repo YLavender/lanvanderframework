@@ -1,6 +1,6 @@
 package lanvander.framework.quartz.springboot.service;
 
-import lanvander.framework.quartz.springboot.request.QuartzJob;
+import lanvander.framework.quartz.springboot.domain.QuartzJob;
 import lanvander.framework.quartz.springboot.request.QuartzJobRequest;
 import lanvander.framework.quartz.springboot.response.QuartzJobResponse;
 
