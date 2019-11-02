@@ -74,7 +74,7 @@
         </javaClientGenerator>
 
 
-        <table tableName="QRTZ_JOB" domainObjectName="Job" enableCountByExample="false"
+        <table tableName="QRTZ_JOB" domainObjectName="QuartzJob" enableCountByExample="false"
                enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false"></table>
 

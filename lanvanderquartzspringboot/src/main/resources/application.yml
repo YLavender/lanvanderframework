@@ -1,3 +1,6 @@
+server:
+  port: 8645
+
 spring:
   quartz:
     scheduler-name: lanvander-SpringBoot-Job

@@ -9,7 +9,7 @@ import java.util.Date;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Job {
+public class QuartzJob {
   private Integer id;
 
   private String jobName;
@@ -46,7 +46,7 @@ public class Job {
 
   private byte[] jobDataMap;
 
-  public Job(
+  public QuartzJob(
       Integer id,
       String jobName,
       String jobGroup,

@@ -67,7 +67,9 @@ public class ElasticJobDemo {
 
     /* 脚本作业
      * 1. 直接写命令
-     * 2. 传脚本文件路径 (Windows系统可执行, Mac系统执行不了, 暂时不清楚原因)
+     * 2. 传脚本文件路径
+     *    (Windows系统可执行, Mac系统执行不了, 暂时不清楚原因)
+     *    (另外Windows系统中通过ClassLoader获取路径也执行不了)
      */
     var jobTypeConfiguration =
         new ScriptJobConfiguration(

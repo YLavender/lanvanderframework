@@ -1,6 +1,6 @@
 package lanvander.framework.quartz.springboot.service;
 
-import lanvander.framework.quartz.springboot.request.Job;
+import lanvander.framework.quartz.springboot.request.QuartzJob;
 import lanvander.framework.quartz.springboot.request.QuartzJobRequest;
 import lanvander.framework.quartz.springboot.response.QuartzJobResponse;
 
@@ -14,7 +14,7 @@ public interface QuartzSpringBootService {
 
   void updateTrigger(QuartzJobRequest request);
 
-  Job deleteJob(QuartzJobRequest request);
+  QuartzJob deleteJob(QuartzJobRequest request);
 
   void pauseJob(QuartzJobRequest request);
 
