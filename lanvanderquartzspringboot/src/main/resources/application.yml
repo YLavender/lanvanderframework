@@ -2,10 +2,12 @@ server:
   port: 8645
 
 spring:
+  main:
+    allow-bean-definition-overriding: true
   quartz:
-    scheduler-name: lanvander-SpringBoot-Job
-    overwrite-existing-jobs: true
     job-store-type: jdbc
+    overwrite-existing-jobs: true
+    scheduler-name: lanvander-SpringBoot-Job
     wait-for-jobs-to-complete-on-shutdown: true
     jdbc:
       comment-prefix: '#'
