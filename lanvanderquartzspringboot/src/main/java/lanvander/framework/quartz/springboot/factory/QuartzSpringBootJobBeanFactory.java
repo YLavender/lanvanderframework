@@ -9,12 +9,13 @@ import org.springframework.stereotype.Component;
 @Component
 public class QuartzSpringBootJobBeanFactory extends AdaptableJobFactory {
 
-  @Autowired private AutowireCapableBeanFactory capableBeanFactory;
+    @Autowired
+    private AutowireCapableBeanFactory capableBeanFactory;
 
-  @Override
-  protected Object createJobInstance(TriggerFiredBundle bundle) throws Exception {
-    Object jobInstance = super.createJobInstance(bundle);
-    capableBeanFactory.autowireBean(jobInstance);
-    return jobInstance;
-  }
+    @Override
+    protected Object createJobInstance(TriggerFiredBundle bundle) throws Exception {
+        Object jobInstance = super.createJobInstance(bundle);
+        capableBeanFactory.autowireBean(jobInstance);
+        return jobInstance;
+    }
 }

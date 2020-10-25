@@ -8,7 +8,7 @@ YLavender's framework study
 # Elastic-Job框架
 ## 前置配置
 需要安装ZooKeeper支持
-## Elastic=Job + Java
+## Elastic-Job + Java
 [JAVA利用Elastic-Job框架](./lanvanderelasticjob/README.MD)
 ## Elastic-Job + SpringBoot
 [SpringBoot整合Elastic-Job框架](./lanvanderelasticjobspringboot/README.MD)

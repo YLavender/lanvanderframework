@@ -12,22 +12,21 @@ import org.springframework.stereotype.Component;
 import java.util.Map;
 
 @Component
-@SuppressWarnings("unchecked")
 public class HandlerProcessor implements BeanFactoryPostProcessor {
 
-  private static final String[] HANDLER_PACKAGE = {"lanvander.quartz.springboot.handler.message"};
+    private static final String[] HANDLER_PACKAGE = {"lanvander.quartz.springboot.handler.message"};
 
-  @Override
-  public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory)
-      throws BeansException {
-    Map<String, Class> handlerMap = Maps.newHashMap();
-    ClassScanner.scan(HANDLER_PACKAGE, HandlerType.class)
-        .forEach(
-            clazz -> {
-              String type = clazz.getAnnotation(HandlerType.class).value();
-              handlerMap.put(type, clazz);
-            });
-    HandlerContext handlerContext = new HandlerContext(handlerMap);
-    beanFactory.registerSingleton(HandlerContext.class.getName(), handlerContext);
-  }
+    @Override
+    public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory)
+            throws BeansException {
+        Map<String, Class<?>> handlerMap = Maps.newHashMap();
+        ClassScanner.scan(HANDLER_PACKAGE, HandlerType.class)
+                .forEach(
+                        clazz -> {
+                            String type = clazz.getAnnotation(HandlerType.class).value();
+                            handlerMap.put(type, clazz);
+                        });
+        HandlerContext handlerContext = new HandlerContext(handlerMap);
+        beanFactory.registerSingleton(HandlerContext.class.getName(), handlerContext);
+    }
 }

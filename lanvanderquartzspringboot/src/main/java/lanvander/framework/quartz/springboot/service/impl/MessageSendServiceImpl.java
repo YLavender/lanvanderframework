@@ -14,21 +14,25 @@ import org.springframework.stereotype.Service;
 @Service
 public class MessageSendServiceImpl implements MessageSendService {
 
-  @Autowired private HandlerContext handlerContext;
+    /**
+     * 在 HandlerProcessor 中动态注册 handlerContext 的 bean
+     */
+    @Autowired
+    private HandlerContext handlerContext;
 
-  @Override
-  public boolean sendMessage(String json) {
-    JSONArray jsonArray = JSONArray.parseArray(json);
-    jsonArray.forEach(
-        object -> {
-          if (object instanceof JSONObject) {
-            JSONObject jsonObject = (JSONObject) object;
-            if (StringUtils.isEmpty(jsonObject.getString("content")))
-              throw new IllegalArgumentException("参数错误, 没有传入发送的消息内容.");
-            AbstractHandler handler = handlerContext.getHandler(jsonObject.getString("type"));
-            handler.sendMessage(jsonObject);
-          }
-        });
-    return true;
-  }
+    @Override
+    public boolean sendMessage(String json) {
+        JSONArray jsonArray = JSONArray.parseArray(json);
+        jsonArray.forEach(
+                object -> {
+                    if (object instanceof JSONObject) {
+                        JSONObject jsonObject = (JSONObject) object;
+                        if (StringUtils.isEmpty(jsonObject.getString("content")))
+                            throw new IllegalArgumentException("参数错误, 没有传入发送的消息内容.");
+                        AbstractHandler handler = handlerContext.getHandler(jsonObject.getString("type"));
+                        handler.sendMessage(jsonObject);
+                    }
+                });
+        return true;
+    }
 }
