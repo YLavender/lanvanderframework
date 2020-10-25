@@ -9,9 +9,9 @@ import org.springframework.stereotype.Component;
 @HandlerType("sms")
 public class SMSMessageSendHandlerImpl extends AbstractHandler {
 
-    @Override
-    public boolean sendMessage(JSONObject jsonObject) {
-        System.out.println("sms sending.....");
-        return false;
-    }
+  @Override
+  public boolean sendMessage(JSONObject jsonObject) {
+    System.out.println("sms sending.....");
+    return false;
+  }
 }

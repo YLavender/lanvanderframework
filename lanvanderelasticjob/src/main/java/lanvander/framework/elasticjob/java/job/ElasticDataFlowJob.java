@@ -2,12 +2,11 @@ package lanvander.framework.elasticjob.java.job;
 
 import com.dangdang.ddframe.job.api.ShardingContext;
 import com.dangdang.ddframe.job.api.dataflow.DataflowJob;
-import lanvander.framework.elasticjob.java.model.Order;
-
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import lanvander.framework.elasticjob.java.model.Order;
 
 // 适用场景: 不间歇的数据处理
 public class ElasticDataFlowJob implements DataflowJob<Order> {
@@ -35,7 +34,9 @@ public class ElasticDataFlowJob implements DataflowJob<Order> {
                         == shardingContext.getShardingItem())
             .collect(Collectors.toList());
     List<Order> subList = null;
-    if (temp.size() > 0) subList = temp.subList(0, 10);
+    if (temp.size() > 0) {
+      subList = temp.subList(0, 10);
+    }
 
     try {
       Thread.sleep(3000);

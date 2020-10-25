@@ -1,28 +1,28 @@
 package lanvander.framework.quartz.springboot.mapper;
 
+import java.util.List;
 import lanvander.framework.quartz.springboot.domain.QuartzJob;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
-import java.util.List;
-
 @Mapper
 public interface QuartzJobMapper {
-    int deleteByPrimaryKey(Integer id);
 
-    int insert(QuartzJob record);
+  int deleteByPrimaryKey(Integer id);
 
-    int insertSelective(QuartzJob record);
+  int insert(QuartzJob record);
 
-    QuartzJob selectByPrimaryKey(Integer id);
+  int insertSelective(QuartzJob record);
 
-    QuartzJob selectByJob(@Param("name") String jobName, @Param("group") String jobGroupName);
+  QuartzJob selectByPrimaryKey(Integer id);
 
-    List<QuartzJob> getAllJobs();
+  QuartzJob selectByJob(@Param("name") String jobName, @Param("group") String jobGroupName);
 
-    int updateByPrimaryKeySelective(QuartzJob record);
+  List<QuartzJob> getAllJobs();
 
-    int updateByPrimaryKeyWithBLOBs(QuartzJob record);
+  int updateByPrimaryKeySelective(QuartzJob record);
 
-    int updateByPrimaryKey(QuartzJob record);
+  int updateByPrimaryKeyWithBLOBs(QuartzJob record);
+
+  int updateByPrimaryKey(QuartzJob record);
 }

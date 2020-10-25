@@ -5,16 +5,17 @@ import lanvander.framework.quartz.springboot.job.QuartzSpringBootMessageJobBean;
 import lombok.Getter;
 
 public enum JobType {
-    NORMAL_JOB("normal", QuartzSpringBootJobBean.class),
-    SMS_JOB("message", QuartzSpringBootMessageJobBean.class);
+  NORMAL_JOB("normal", QuartzSpringBootJobBean.class),
+  SMS_JOB("message", QuartzSpringBootMessageJobBean.class);
 
-    @Getter
-    private final String className;
-    @Getter
-    private final Class jobClass;
+  @Getter
+  private final String className;
 
-    JobType(String className, Class jobClass) {
-        this.className = className;
-        this.jobClass = jobClass;
-    }
+  @Getter
+  private final Class jobClass;
+
+  JobType(String className, Class jobClass) {
+    this.className = className;
+    this.jobClass = jobClass;
+  }
 }

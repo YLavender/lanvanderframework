@@ -9,6 +9,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @ComponentScan({"lanvander.base", "lanvander.framework"})
 @EnableSwagger2
 public class SpringBootElasticJobApplication {
+
   public static void main(String[] args) {
     SpringApplication.run(SpringBootElasticJobApplication.class, args);
   }

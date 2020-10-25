@@ -1,85 +1,85 @@
 package lanvander.framework.quartz.springboot.domain;
 
+import java.util.Date;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.util.Date;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class QuartzJob {
-    private Integer id;
 
-    private String jobName;
+  private Integer id;
 
-    private String jobGroup;
+  private String jobName;
 
-    private String jobType;
+  private String jobGroup;
 
-    private String triggerName;
+  private String jobType;
 
-    private String triggerGroupName;
+  private String triggerName;
 
-    private String description;
+  private String triggerGroupName;
 
-    private String cronExpression;
+  private String description;
 
-    private Date startDate;
+  private String cronExpression;
 
-    private Date endDate;
+  private Date startDate;
 
-    private String isPause;
+  private Date endDate;
 
-    private Integer intervalTime;
+  private String isPause;
 
-    private String intervalTimeType;
+  private Integer intervalTime;
 
-    private Integer intervalCount;
+  private String intervalTimeType;
 
-    private Date createTime;
+  private Integer intervalCount;
 
-    private Date updateTime;
+  private Date createTime;
 
-    private Integer version;
+  private Date updateTime;
 
-    private byte[] jobDataMap;
+  private Integer version;
 
-    public QuartzJob(
-            Integer id,
-            String jobName,
-            String jobGroup,
-            String jobType,
-            String triggerName,
-            String triggerGroupName,
-            String description,
-            String cronExpression,
-            Date startDate,
-            Date endDate,
-            String isPause,
-            Integer intervalTime,
-            String intervalTimeType,
-            Integer intervalCount,
-            Date createTime,
-            Date updateTime,
-            Integer version) {
-        this.id = id;
-        this.jobName = jobName;
-        this.jobGroup = jobGroup;
-        this.jobType = jobType;
-        this.triggerName = triggerName;
-        this.triggerGroupName = triggerGroupName;
-        this.description = description;
-        this.cronExpression = cronExpression;
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.isPause = isPause;
-        this.intervalTime = intervalTime;
-        this.intervalTimeType = intervalTimeType;
-        this.intervalCount = intervalCount;
-        this.createTime = createTime;
-        this.updateTime = updateTime;
-        this.version = version;
-    }
+  private byte[] jobDataMap;
+
+  public QuartzJob(
+      Integer id,
+      String jobName,
+      String jobGroup,
+      String jobType,
+      String triggerName,
+      String triggerGroupName,
+      String description,
+      String cronExpression,
+      Date startDate,
+      Date endDate,
+      String isPause,
+      Integer intervalTime,
+      String intervalTimeType,
+      Integer intervalCount,
+      Date createTime,
+      Date updateTime,
+      Integer version) {
+    this.id = id;
+    this.jobName = jobName;
+    this.jobGroup = jobGroup;
+    this.jobType = jobType;
+    this.triggerName = triggerName;
+    this.triggerGroupName = triggerGroupName;
+    this.description = description;
+    this.cronExpression = cronExpression;
+    this.startDate = startDate;
+    this.endDate = endDate;
+    this.isPause = isPause;
+    this.intervalTime = intervalTime;
+    this.intervalTimeType = intervalTimeType;
+    this.intervalCount = intervalCount;
+    this.createTime = createTime;
+    this.updateTime = updateTime;
+    this.version = version;
+  }
 }

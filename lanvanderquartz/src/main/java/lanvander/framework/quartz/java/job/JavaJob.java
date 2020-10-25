@@ -1,11 +1,15 @@
 package lanvander.framework.quartz.java.job;
 
 import com.alibaba.fastjson.JSON;
+import java.time.LocalTime;
 import lanvander.utils.RandomUtils;
 import lombok.Data;
-import org.quartz.*;
-
-import java.time.LocalTime;
+import org.quartz.DisallowConcurrentExecution;
+import org.quartz.Job;
+import org.quartz.JobExecutionContext;
+import org.quartz.JobExecutionException;
+import org.quartz.PersistJobDataAfterExecution;
+import org.quartz.SchedulerException;
 
 @Data
 @DisallowConcurrentExecution
@@ -13,9 +17,7 @@ import java.time.LocalTime;
 public class JavaJob implements Job {
 
   /**
-   * 需要Get、Set方法传值 <br>
-   * 或者 <br>
-   * 用JobDataMap传值,要确保key值一致
+   * 需要Get、Set方法传值 <br> 或者 <br> 用JobDataMap传值,要确保key值一致
    */
   private String name;
 

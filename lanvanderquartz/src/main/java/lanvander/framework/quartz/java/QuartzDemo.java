@@ -1,12 +1,21 @@
 package lanvander.framework.quartz.java;
 
+import java.util.Date;
 import lanvander.framework.quartz.java.job.JavaJob;
-import org.quartz.*;
+import org.quartz.CronScheduleBuilder;
+import org.quartz.DateBuilder;
+import org.quartz.JobBuilder;
+import org.quartz.JobDataMap;
+import org.quartz.JobDetail;
+import org.quartz.Scheduler;
+import org.quartz.SchedulerException;
+import org.quartz.SimpleScheduleBuilder;
+import org.quartz.Trigger;
+import org.quartz.TriggerBuilder;
 import org.quartz.impl.StdSchedulerFactory;
 
-import java.util.Date;
-
 public class QuartzDemo {
+
   public static void main(String[] args) throws SchedulerException, InterruptedException {
     Scheduler scheduler = StdSchedulerFactory.getDefaultScheduler();
     scheduler.start();

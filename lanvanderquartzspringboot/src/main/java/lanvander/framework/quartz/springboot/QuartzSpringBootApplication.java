@@ -9,7 +9,8 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @SpringBootApplication
 @ComponentScan(basePackages = {"lanvander.base", "lanvander.framework"})
 public class QuartzSpringBootApplication {
-    public static void main(String[] args) {
-        SpringApplication.run(QuartzSpringBootApplication.class, args);
-    }
+
+  public static void main(String[] args) {
+    SpringApplication.run(QuartzSpringBootApplication.class, args);
+  }
 }

@@ -1,87 +1,57 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="lanvander.framework.quartz.springboot.mapper.QuartzJobMapper">
-    <resultMap id="BaseResultMap" type="lanvander.framework.quartz.springboot.domain.QuartzJob">
-        <constructor>
-            <idArg column="ID" javaType="java.lang.Integer" jdbcType="INTEGER"/>
-            <arg column="JOB_NAME" javaType="java.lang.String" jdbcType="VARCHAR"/>
-            <arg column="JOB_GROUP" javaType="java.lang.String" jdbcType="VARCHAR"/>
-            <arg column="JOB_TYPE" javaType="java.lang.String" jdbcType="VARCHAR"/>
-            <arg column="TRIGGER_NAME" javaType="java.lang.String" jdbcType="VARCHAR"/>
-            <arg column="TRIGGER_GROUP_NAME" javaType="java.lang.String" jdbcType="VARCHAR"/>
-            <arg column="DESCRIPTION" javaType="java.lang.String" jdbcType="VARCHAR"/>
-            <arg column="CRON_EXPRESSION" javaType="java.lang.String" jdbcType="VARCHAR"/>
-            <arg column="START_DATE" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
-            <arg column="END_DATE" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
-            <arg column="IS_PAUSE" javaType="java.lang.String" jdbcType="VARCHAR"/>
-            <arg column="INTERVAL_TIME" javaType="java.lang.Integer" jdbcType="INTEGER"/>
-            <arg column="INTERVAL_TIME_TYPE" javaType="java.lang.String" jdbcType="VARCHAR"/>
-            <arg column="INTERVAL_COUNT" javaType="java.lang.Integer" jdbcType="INTEGER"/>
-            <arg column="CREATE_TIME" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
-            <arg column="UPDATE_TIME" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
-            <arg column="VERSION" javaType="java.lang.Integer" jdbcType="INTEGER"/>
-        </constructor>
-    </resultMap>
-    <resultMap id="ResultMapWithBLOBs" type="lanvander.framework.quartz.springboot.domain.QuartzJob">
-        <constructor>
-            <idArg column="ID" javaType="java.lang.Integer" jdbcType="INTEGER"/>
-            <arg column="JOB_NAME" javaType="java.lang.String" jdbcType="VARCHAR"/>
-            <arg column="JOB_GROUP" javaType="java.lang.String" jdbcType="VARCHAR"/>
-            <arg column="JOB_TYPE" javaType="java.lang.String" jdbcType="VARCHAR"/>
-            <arg column="TRIGGER_NAME" javaType="java.lang.String" jdbcType="VARCHAR"/>
-            <arg column="TRIGGER_GROUP_NAME" javaType="java.lang.String" jdbcType="VARCHAR"/>
-            <arg column="DESCRIPTION" javaType="java.lang.String" jdbcType="VARCHAR"/>
-            <arg column="CRON_EXPRESSION" javaType="java.lang.String" jdbcType="VARCHAR"/>
-            <arg column="START_DATE" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
-            <arg column="END_DATE" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
-            <arg column="IS_PAUSE" javaType="java.lang.String" jdbcType="VARCHAR"/>
-            <arg column="INTERVAL_TIME" javaType="java.lang.Integer" jdbcType="INTEGER"/>
-            <arg column="INTERVAL_TIME_TYPE" javaType="java.lang.String" jdbcType="VARCHAR"/>
-            <arg column="INTERVAL_COUNT" javaType="java.lang.Integer" jdbcType="INTEGER"/>
-            <arg column="CREATE_TIME" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
-            <arg column="UPDATE_TIME" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
-            <arg column="VERSION" javaType="java.lang.Integer" jdbcType="INTEGER"/>
-            <arg column="JOB_DATA_MAP" javaType="_byte[]" jdbcType="LONGVARBINARY"/>
-        </constructor>
-    </resultMap>
-    <sql id="Base_Column_List">
-        ID, JOB_NAME, JOB_GROUP, JOB_TYPE, TRIGGER_NAME, TRIGGER_GROUP_NAME, DESCRIPTION,
-        CRON_EXPRESSION, START_DATE, END_DATE, IS_PAUSE, INTERVAL_TIME, INTERVAL_TIME_TYPE,
-        INTERVAL_COUNT, CREATE_TIME, UPDATE_TIME, VERSION
-    </sql>
-    <sql id="Blob_Column_List">
-        JOB_DATA_MAP
-    </sql>
-    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
-        select
-        <include refid="Base_Column_List"/>
-        ,
-        <include refid="Blob_Column_List"/>
-        from QRTZ_JOB
-        where ID = #{id,jdbcType=INTEGER}
-    </select>
-    <select id="selectByJob" parameterType="map" resultMap="ResultMapWithBLOBs">
-        select
-        <include refid="Base_Column_List"/>
-        ,
-        <include refid="Blob_Column_List"/>
-        from QRTZ_JOB
-        where JOB_NAME = #{name}
-        and JOB_GROUP = #{group}
-    </select>
-    <select id="getAllJobs" resultMap="ResultMapWithBLOBs">
-        select
-        <include refid="Base_Column_List"/>
-        ,
-        <include refid="Blob_Column_List"/>
-        from QRTZ_JOB
-    </select>
-    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+
+  <resultMap id="BaseResultMap" type="lanvander.framework.quartz.springboot.domain.QuartzJob">
+    <constructor>
+      <idArg column="ID" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+      <arg column="JOB_NAME" javaType="java.lang.String" jdbcType="VARCHAR"/>
+      <arg column="JOB_GROUP" javaType="java.lang.String" jdbcType="VARCHAR"/>
+      <arg column="JOB_TYPE" javaType="java.lang.String" jdbcType="VARCHAR"/>
+      <arg column="TRIGGER_NAME" javaType="java.lang.String" jdbcType="VARCHAR"/>
+      <arg column="TRIGGER_GROUP_NAME" javaType="java.lang.String" jdbcType="VARCHAR"/>
+      <arg column="DESCRIPTION" javaType="java.lang.String" jdbcType="VARCHAR"/>
+      <arg column="CRON_EXPRESSION" javaType="java.lang.String" jdbcType="VARCHAR"/>
+      <arg column="START_DATE" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
+      <arg column="END_DATE" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
+      <arg column="IS_PAUSE" javaType="java.lang.String" jdbcType="VARCHAR"/>
+      <arg column="INTERVAL_TIME" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+      <arg column="INTERVAL_TIME_TYPE" javaType="java.lang.String" jdbcType="VARCHAR"/>
+      <arg column="INTERVAL_COUNT" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+      <arg column="CREATE_TIME" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
+      <arg column="UPDATE_TIME" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
+      <arg column="VERSION" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+    </constructor>
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="lanvander.framework.quartz.springboot.domain.QuartzJob">
+    <constructor>
+      <idArg column="ID" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+      <arg column="JOB_NAME" javaType="java.lang.String" jdbcType="VARCHAR"/>
+      <arg column="JOB_GROUP" javaType="java.lang.String" jdbcType="VARCHAR"/>
+      <arg column="JOB_TYPE" javaType="java.lang.String" jdbcType="VARCHAR"/>
+      <arg column="TRIGGER_NAME" javaType="java.lang.String" jdbcType="VARCHAR"/>
+      <arg column="TRIGGER_GROUP_NAME" javaType="java.lang.String" jdbcType="VARCHAR"/>
+      <arg column="DESCRIPTION" javaType="java.lang.String" jdbcType="VARCHAR"/>
+      <arg column="CRON_EXPRESSION" javaType="java.lang.String" jdbcType="VARCHAR"/>
+      <arg column="START_DATE" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
+      <arg column="END_DATE" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
+      <arg column="IS_PAUSE" javaType="java.lang.String" jdbcType="VARCHAR"/>
+      <arg column="INTERVAL_TIME" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+      <arg column="INTERVAL_TIME_TYPE" javaType="java.lang.String" jdbcType="VARCHAR"/>
+      <arg column="INTERVAL_COUNT" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+      <arg column="CREATE_TIME" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
+      <arg column="UPDATE_TIME" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
+      <arg column="VERSION" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+      <arg column="JOB_DATA_MAP" javaType="_byte[]" jdbcType="LONGVARBINARY"/>
+    </constructor>
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
         delete
         from QRTZ_JOB
         where ID = #{id,jdbcType=INTEGER}
     </delete>
-    <insert id="insert" parameterType="lanvander.framework.quartz.springboot.domain.QuartzJob">
+  <insert id="insert" parameterType="lanvander.framework.quartz.springboot.domain.QuartzJob">
         insert into QRTZ_JOB (JOB_NAME, JOB_GROUP,
                               JOB_TYPE, TRIGGER_NAME, TRIGGER_GROUP_NAME,
                               DESCRIPTION, CRON_EXPRESSION, START_DATE,
@@ -95,154 +65,189 @@
                 #{intervalTimeType,jdbcType=VARCHAR}, #{intervalCount,jdbcType=INTEGER}, NOW(),
                 NOW(), 0, #{jobDataMap,jdbcType=LONGVARBINARY})
     </insert>
-    <insert id="insertSelective" parameterType="lanvander.framework.quartz.springboot.domain.QuartzJob">
-        insert into QRTZ_JOB
-        <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="jobName != null">
-                JOB_NAME,
-            </if>
-            <if test="jobGroup != null">
-                JOB_GROUP,
-            </if>
-            <if test="jobType != null">
-                JOB_TYPE,
-            </if>
-            <if test="triggerName != null">
-                TRIGGER_NAME,
-            </if>
-            <if test="triggerGroupName != null">
-                TRIGGER_GROUP_NAME,
-            </if>
-            <if test="description != null">
-                DESCRIPTION,
-            </if>
-            <if test="cronExpression != null">
-                CRON_EXPRESSION,
-            </if>
-            <if test="startDate != null">
-                START_DATE,
-            </if>
-            <if test="endDate != null">
-                END_DATE,
-            </if>
-            <if test="isPause != null">
-                IS_PAUSE,
-            </if>
-            <if test="intervalTime != null">
-                INTERVAL_TIME,
-            </if>
-            <if test="intervalTimeType != null">
-                INTERVAL_TIME_TYPE,
-            </if>
-            <if test="intervalCount != null">
-                INTERVAL_COUNT,
-            </if>
-            CREATE_TIME,
-            UPDATE_TIME,
-            VERSION,
-            <if test="jobDataMap != null">
-                JOB_DATA_MAP,
-            </if>
-        </trim>
-        <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="jobName != null">
-                #{jobName,jdbcType=VARCHAR},
-            </if>
-            <if test="jobGroup != null">
-                #{jobGroup,jdbcType=VARCHAR},
-            </if>
-            <if test="jobType != null">
-                #{jobType,jdbcType=VARCHAR},
-            </if>
-            <if test="triggerName != null">
-                #{triggerName,jdbcType=VARCHAR},
-            </if>
-            <if test="triggerGroupName != null">
-                #{triggerGroupName,jdbcType=VARCHAR},
-            </if>
-            <if test="description != null">
-                #{description,jdbcType=VARCHAR},
-            </if>
-            <if test="cronExpression != null">
-                #{cronExpression,jdbcType=VARCHAR},
-            </if>
-            <if test="startDate != null">
-                #{startDate,jdbcType=TIMESTAMP},
-            </if>
-            <if test="endDate != null">
-                #{endDate,jdbcType=TIMESTAMP},
-            </if>
-            <if test="isPause != null">
-                #{isPause,jdbcType=VARCHAR},
-            </if>
-            <if test="intervalTime != null">
-                #{intervalTime,jdbcType=INTEGER},
-            </if>
-            <if test="intervalTimeType != null">
-                #{intervalTimeType,jdbcType=VARCHAR},
-            </if>
-            <if test="intervalCount != null">
-                #{intervalCount,jdbcType=INTEGER},
-            </if>
-            NOW(),
-            NOW(),
-            0,
-            <if test="jobDataMap != null">
-                #{jobDataMap,jdbcType=LONGVARBINARY},
-            </if>
-        </trim>
-    </insert>
-    <update id="updateByPrimaryKeySelective" parameterType="lanvander.framework.quartz.springboot.domain.QuartzJob">
-        update QRTZ_JOB
-        <set>
-            <if test="jobName != null">
-                JOB_NAME = #{jobName,jdbcType=VARCHAR},
-            </if>
-            <if test="jobGroup != null">
-                JOB_GROUP = #{jobGroup,jdbcType=VARCHAR},
-            </if>
-            <if test="jobType != null">
-                JOB_TYPE = #{jobType,jdbcType=VARCHAR},
-            </if>
-            <if test="triggerName != null">
-                TRIGGER_NAME = #{triggerName,jdbcType=VARCHAR},
-            </if>
-            <if test="triggerGroupName != null">
-                TRIGGER_GROUP_NAME = #{triggerGroupName,jdbcType=VARCHAR},
-            </if>
-            <if test="description != null">
-                DESCRIPTION = #{description,jdbcType=VARCHAR},
-            </if>
-            <if test="cronExpression != null">
-                CRON_EXPRESSION = #{cronExpression,jdbcType=VARCHAR},
-            </if>
-            <if test="startDate != null">
-                START_DATE = #{startDate,jdbcType=TIMESTAMP},
-            </if>
-            <if test="endDate != null">
-                END_DATE = #{endDate,jdbcType=TIMESTAMP},
-            </if>
-            <if test="isPause != null">
-                IS_PAUSE = #{isPause,jdbcType=VARCHAR},
-            </if>
-            <if test="intervalTime != null">
-                INTERVAL_TIME = #{intervalTime,jdbcType=INTEGER},
-            </if>
-            <if test="intervalTimeType != null">
-                INTERVAL_TIME_TYPE = #{intervalTimeType,jdbcType=VARCHAR},
-            </if>
-            <if test="intervalCount != null">
-                INTERVAL_COUNT = #{intervalCount,jdbcType=INTEGER},
-            </if>
-            UPDATE_TIME = NOW(),
-            VERSION = VERSION + 1,
-            <if test="jobDataMap != null">
-                JOB_DATA_MAP = #{jobDataMap,jdbcType=LONGVARBINARY},
-            </if>
-        </set>
-        where ID = #{id,jdbcType=INTEGER}
-    </update>
-    <update id="updateByPrimaryKeyWithBLOBs" parameterType="lanvander.framework.quartz.springboot.domain.QuartzJob">
+  <insert id="insertSelective"
+    parameterType="lanvander.framework.quartz.springboot.domain.QuartzJob">
+    insert into QRTZ_JOB
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="jobName != null">
+        JOB_NAME,
+      </if>
+      <if test="jobGroup != null">
+        JOB_GROUP,
+      </if>
+      <if test="jobType != null">
+        JOB_TYPE,
+      </if>
+      <if test="triggerName != null">
+        TRIGGER_NAME,
+      </if>
+      <if test="triggerGroupName != null">
+        TRIGGER_GROUP_NAME,
+      </if>
+      <if test="description != null">
+        DESCRIPTION,
+      </if>
+      <if test="cronExpression != null">
+        CRON_EXPRESSION,
+      </if>
+      <if test="startDate != null">
+        START_DATE,
+      </if>
+      <if test="endDate != null">
+        END_DATE,
+      </if>
+      <if test="isPause != null">
+        IS_PAUSE,
+      </if>
+      <if test="intervalTime != null">
+        INTERVAL_TIME,
+      </if>
+      <if test="intervalTimeType != null">
+        INTERVAL_TIME_TYPE,
+      </if>
+      <if test="intervalCount != null">
+        INTERVAL_COUNT,
+      </if>
+      CREATE_TIME,
+      UPDATE_TIME,
+      VERSION,
+      <if test="jobDataMap != null">
+        JOB_DATA_MAP,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="jobName != null">
+        #{jobName,jdbcType=VARCHAR},
+      </if>
+      <if test="jobGroup != null">
+        #{jobGroup,jdbcType=VARCHAR},
+      </if>
+      <if test="jobType != null">
+        #{jobType,jdbcType=VARCHAR},
+      </if>
+      <if test="triggerName != null">
+        #{triggerName,jdbcType=VARCHAR},
+      </if>
+      <if test="triggerGroupName != null">
+        #{triggerGroupName,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="cronExpression != null">
+        #{cronExpression,jdbcType=VARCHAR},
+      </if>
+      <if test="startDate != null">
+        #{startDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endDate != null">
+        #{endDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isPause != null">
+        #{isPause,jdbcType=VARCHAR},
+      </if>
+      <if test="intervalTime != null">
+        #{intervalTime,jdbcType=INTEGER},
+      </if>
+      <if test="intervalTimeType != null">
+        #{intervalTimeType,jdbcType=VARCHAR},
+      </if>
+      <if test="intervalCount != null">
+        #{intervalCount,jdbcType=INTEGER},
+      </if>
+      NOW(),
+      NOW(),
+      0,
+      <if test="jobDataMap != null">
+        #{jobDataMap,jdbcType=LONGVARBINARY},
+      </if>
+    </trim>
+  </insert>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select
+    <include refid="Base_Column_List"/>
+    ,
+    <include refid="Blob_Column_List"/>
+    from QRTZ_JOB
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectByJob" parameterType="map" resultMap="ResultMapWithBLOBs">
+    select
+    <include refid="Base_Column_List"/>
+    ,
+    <include refid="Blob_Column_List"/>
+    from QRTZ_JOB
+    where JOB_NAME = #{name}
+    and JOB_GROUP = #{group}
+  </select>
+  <select id="getAllJobs" resultMap="ResultMapWithBLOBs">
+    select
+    <include refid="Base_Column_List"/>
+    ,
+    <include refid="Blob_Column_List"/>
+    from QRTZ_JOB
+  </select>
+  <sql id="Base_Column_List">
+        ID, JOB_NAME, JOB_GROUP, JOB_TYPE, TRIGGER_NAME, TRIGGER_GROUP_NAME, DESCRIPTION,
+        CRON_EXPRESSION, START_DATE, END_DATE, IS_PAUSE, INTERVAL_TIME, INTERVAL_TIME_TYPE,
+        INTERVAL_COUNT, CREATE_TIME, UPDATE_TIME, VERSION
+    </sql>
+  <sql id="Blob_Column_List">
+        JOB_DATA_MAP
+    </sql>
+  <update id="updateByPrimaryKeySelective"
+    parameterType="lanvander.framework.quartz.springboot.domain.QuartzJob">
+    update QRTZ_JOB
+    <set>
+      <if test="jobName != null">
+        JOB_NAME = #{jobName,jdbcType=VARCHAR},
+      </if>
+      <if test="jobGroup != null">
+        JOB_GROUP = #{jobGroup,jdbcType=VARCHAR},
+      </if>
+      <if test="jobType != null">
+        JOB_TYPE = #{jobType,jdbcType=VARCHAR},
+      </if>
+      <if test="triggerName != null">
+        TRIGGER_NAME = #{triggerName,jdbcType=VARCHAR},
+      </if>
+      <if test="triggerGroupName != null">
+        TRIGGER_GROUP_NAME = #{triggerGroupName,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        DESCRIPTION = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="cronExpression != null">
+        CRON_EXPRESSION = #{cronExpression,jdbcType=VARCHAR},
+      </if>
+      <if test="startDate != null">
+        START_DATE = #{startDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endDate != null">
+        END_DATE = #{endDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isPause != null">
+        IS_PAUSE = #{isPause,jdbcType=VARCHAR},
+      </if>
+      <if test="intervalTime != null">
+        INTERVAL_TIME = #{intervalTime,jdbcType=INTEGER},
+      </if>
+      <if test="intervalTimeType != null">
+        INTERVAL_TIME_TYPE = #{intervalTimeType,jdbcType=VARCHAR},
+      </if>
+      <if test="intervalCount != null">
+        INTERVAL_COUNT = #{intervalCount,jdbcType=INTEGER},
+      </if>
+      UPDATE_TIME = NOW(),
+      VERSION = VERSION + 1,
+      <if test="jobDataMap != null">
+        JOB_DATA_MAP = #{jobDataMap,jdbcType=LONGVARBINARY},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs"
+    parameterType="lanvander.framework.quartz.springboot.domain.QuartzJob">
         update QRTZ_JOB
         set JOB_NAME           = #{jobName,jdbcType=VARCHAR},
             JOB_GROUP          = #{jobGroup,jdbcType=VARCHAR},
@@ -262,7 +267,8 @@
             JOB_DATA_MAP       = #{jobDataMap,jdbcType=LONGVARBINARY}
         where ID = #{id,jdbcType=INTEGER}
     </update>
-    <update id="updateByPrimaryKey" parameterType="lanvander.framework.quartz.springboot.domain.QuartzJob">
+  <update id="updateByPrimaryKey"
+    parameterType="lanvander.framework.quartz.springboot.domain.QuartzJob">
         update QRTZ_JOB
         set JOB_NAME           = #{jobName,jdbcType=VARCHAR},
             JOB_GROUP          = #{jobGroup,jdbcType=VARCHAR},

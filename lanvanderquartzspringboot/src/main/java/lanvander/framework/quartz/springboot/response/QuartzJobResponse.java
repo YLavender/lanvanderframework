@@ -1,49 +1,49 @@
 package lanvander.framework.quartz.springboot.response;
 
+import java.util.Date;
+import java.util.Map;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.util.Date;
-import java.util.Map;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class QuartzJobResponse {
-    private Integer id;
 
-    private String jobName;
+  private Integer id;
 
-    private String jobGroup;
+  private String jobName;
 
-    private String jobType;
+  private String jobGroup;
 
-    private String triggerName;
+  private String jobType;
 
-    private String triggerGroupName;
+  private String triggerName;
 
-    private String description;
+  private String triggerGroupName;
 
-    private String cronExpression;
+  private String description;
 
-    private Date startDate;
+  private String cronExpression;
 
-    private Date endDate;
+  private Date startDate;
 
-    private String isPause;
+  private Date endDate;
 
-    private Integer intervalTime;
+  private String isPause;
 
-    private String intervalTimeType;
+  private Integer intervalTime;
 
-    private Integer intervalCount;
+  private String intervalTimeType;
 
-    private Date createTime;
+  private Integer intervalCount;
 
-    private Date updateTime;
+  private Date createTime;
 
-    private Integer version;
+  private Date updateTime;
 
-    private Map<String, Object> jobDataMap;
+  private Integer version;
+
+  private Map<String, Object> jobDataMap;
 }
